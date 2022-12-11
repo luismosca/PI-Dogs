@@ -3,23 +3,22 @@ const axios = require('axios');
 
 // busco los Dogs de la DB
 const getDBdogs = async () => {
-  const dbDogs = await Dog.findAll({
-    include: {
-      model: Temperament,
-      attributes: "name",
-    },
-  })
+const dbDogs = await Dog.findAll({
+  include: {
+    model: Temperament,
+    attributes: ["name"],
+  },
+})
 
 
 const dbDogsClean = dbDogs.map((dog) => {
   return {
     id: dog.id,
     name: dog.name,
-    height: dog.height,
-    weight: dog.weight,
-    life_span: dog.life_span,
+    image: dog.image,
+    weight: dog.weight.metric,
     origin: "db",
-    Temperaments: dog.Temperaments,
+    temperament: dog.temperament,
   };
 });
 return dbDogsClean;
@@ -27,21 +26,19 @@ return dbDogsClean;
 
 const getAPIdogs = async () => {
 
-  const apiDogs = await axios.get('https://api.thedogapi.com/v1/breeds');
+const apiDogs = await axios.get('https://api.thedogapi.com/v1/breeds');
 
-  const apiDogsClean = apiDogs.map((dog) => {
-    return {
-      id: dog.id,
-      name: dog.name,
-      height: dog.height,
-      weight: dog.weight,
-      life_span: dog.life_span,
-      origin: "api",
-      Temperaments: dog.Temperaments,
-    };
-  });
-  return apiDogsClean;
-
+const apiDogsClean = apiDogs.data.map((dog) => {
+  return {
+    id: dog.id,
+    name: dog.name,
+    image: dog.image.url,
+    weight: dog.weight.metric,
+    origin: "api",
+    temperament: dog.temperament,
+  };
+});
+return apiDogsClean;
 };
 
 const getAllDogs = async () =>{

@@ -1,0 +1,23 @@
+
+.myButton{
+      position: absolute;
+      left:82%;
+      top:80%;
+ }
+
+.MyImage button {
+    font-family: 'Press Start 2P';
+    height: 60px;
+    width: 180px;
+    border-radius: 5px;
+    border: 3px solid orangered;
+    background-color: chartreuse;
+    background: linear-gradient(90deg,chartreuse 10%, #fff 100%);
+}
+.MyImage {
+    background-image: url(../../Img/apolloDog.jpg);
+    background-position: center center;
+    height: 100vh;
+    background-attachment: fixed;
+    background-size: cover;
+}

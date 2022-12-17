@@ -6,7 +6,7 @@ const axios = require('axios');
 
 const getDogs = async (req, res) => {
   let { name } = req.query;
-  //console.log(name)
+  
   if (name) {
     name = name.split(" ").join("-").toLowerCase();
     //Busco primero en la BD
@@ -26,37 +26,39 @@ const getDogs = async (req, res) => {
     })
     
     if(!nameDog.length) {
-      console.log("Voy por aqui")
+      let allSearchedDogs = []
       // Busco en la API
-      const dogName = await axios.get(`${API_URL}breeds/search?q=${name}`)
-      //console.log(dogName.data) 
-      const imageID = dogName.data[0].reference_image_id
-      
-      console.log(imageID)
-      
-      const apiDogs = await axios.get('https://api.thedogapi.com/v1/breeds');
-  
-      const imagen = apiDogs.data.filter(function(image){
-        return image.image.id === imageID
-      })
-      //console.log(imagen)
-      let imgUrl = imagen[0].image.url
-      console.log(imgUrl)
-
-      const results = {
-        id: dogName.data[0].id,
-        name: dogName.data[0].name,
-        height: dogName.data[0].height.metric,
-        weight: dogName.data[0].weight.metric,
-        life_span: dogName.data[0].life_span,
-        temperament: dogName.data[0].temperament,
-        image: imgUrl
+      const allDogsByName = await axios.get(`${API_URL}breeds/search?q=${name}`)
+      //console.log(allDogsByName.data) 
+      //busco todos los dogs de la API
+      const allDogsFromAPI = await axios.get('https://api.thedogapi.com/v1/breeds');
+      allDogsByName.data.map(dog => {
+        const imageID = dog.reference_image_id
+        //busco la imagen de cada uno de los dogs
+        const imagen = allDogsFromAPI.data.filter(function(dog){
+          return dog.image.id === imageID
+        })
+        //busco la URL de la imagen de los dogs
+        if (imagen.length) {
+          let imgUrl = imagen[0].image.url
+          //guardo en results todos los datos pedidos de los dogs
+          const results = {
+            id: dog.id,
+            name: dog.name,
+            height: dog.height.metric,
+            weight: dog.weight.metric,
+            life_span: dog.life_span,
+            temperament: dog.temperament,
+            image: imgUrl
+            }
+          
+          allSearchedDogs.push(results)
         }
-        console.log(results)
-        
+      })
+                
       try {
-        if (!results.length){
-          res.status(200).json(results);
+        if (allSearchedDogs.length){
+          res.status(200).json(allSearchedDogs);
         } else {
           res.status(400).send('Dog not found')
         }
@@ -69,43 +71,44 @@ const getDogs = async (req, res) => {
     }
 
   } else {
-    console.log('voy por todos los dogs')
+    //console.log('voy por todos los dogs')
     let results = await getAllDogs()
     res.status(200).json(results);
     
   }
 };
-
+//busco lo temperamenteros de los dogs
 const getDog = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   const temperaments = {
     model: Temperament,
     attributes: ['name'],
     through: {
-    attributes: []
+      attributes: []
     }
-}
+  }
+
 try {
   const regex = /([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/
 
   if (regex.test(id)){
-    console.log(`Por if true en DB con id: ${id}`)
+    //Por if true en DB con id: 
     const dogInDb = await Dog.findOne({ where: { id: id }, includes: [temperaments] });
-
-    console.log(dogInDb)
     res.json(dogInDb);
   }
+  //bysco dog en API por ID
   const dogInAPI = await axios.get(`${API_URL}breeds/${id}?key=${API_KEY}`)
+  //tomo la imagen del dog
   const imageID = dogInAPI.data.reference_image_id
-  const apiDogs = await axios.get('https://api.thedogapi.com/v1/breeds');
-  
-  const imagen = apiDogs.data.filter(function(image){
+  //busco todos los dogs en la API
+  const allDogsFromAPI = await axios.get('https://api.thedogapi.com/v1/breeds');
+  //tomo la imagen de cada uno de los dogs
+  const imagen = allDogsFromAPI.data.filter(function(image){
     return image.image.id === imageID
   })
-  //console.log(imagen)
+  //tomo la URL de la imagen del dog
   let imgUrl = imagen[0].image.url
-
+  //guardo en resultado los datos de los dogs
   const resultado = {
     id: dogInAPI.data.id,
     name: dogInAPI.data.name,
@@ -116,9 +119,7 @@ try {
     image: imgUrl
     }
 
-  //console.log(resultado)
-  //console.log(`IMPLEMENTING YET: Get by id en API ID: ${id}`)
-  
+  //retorno el resultado  
   if (resultado){
     res.json(resultado)
   }
@@ -132,5 +133,4 @@ try {
 module.exports = {
   getDogs,
   getDog,
-  
 };

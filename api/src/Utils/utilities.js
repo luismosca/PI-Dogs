@@ -10,23 +10,24 @@ const dbDogs = await Dog.findAll({
   },
 })
 
+
 // determino que son los dogs de la BD
 const dbDogsClean = dbDogs.map((dog) => {
   return {
     id: dog.id,
     name: dog.name,
     image: dog.image,
-    weight: dog.weight.metric,
+    weight: dog.weight,
     origin: "db",
     temperament: dog.temperament,
   };
 });
+
 return dbDogsClean;
 };
 
 // busco los dogs de la API
 const getAPIdogs = async () => {
-
 const apiDogs = await axios.get('https://api.thedogapi.com/v1/breeds');
 // determino que son los dogs de la API
 const apiDogsClean = apiDogs.data.map((dog) => {
@@ -41,6 +42,7 @@ const apiDogsClean = apiDogs.data.map((dog) => {
 });
 return apiDogsClean;
 };
+
 // retorno todos los dogs de la BD y de la API
 const getAllDogs = async () =>{
   const dbDogs = await getDBdogs();

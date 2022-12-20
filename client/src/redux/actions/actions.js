@@ -10,7 +10,7 @@ export const CREATE_DOG = "CREATE_DOG";
 //* Trae todos los dogs (DB + API)
 export function getAllDogs() {
   return async function (dispatch) {
-      return await axios.get('https://api.thedogapi.com/v1/breeds')
+      return await axios.get('http://localhost:3001/breeds')
       .then((allDogs) => {
           dispatch({ type: GET_ALL_DOGS, payload: allDogs.data })})
       .catch((err) => {
@@ -62,7 +62,7 @@ export function getTemperaments() {
 
 export function createDog(dogs){
   return async function(){
-      const response = await axios.post('/breed', dogs)
+      const response = await axios.post('http://localhost:3001/dogcreate', dogs)
       return response
   }
 }

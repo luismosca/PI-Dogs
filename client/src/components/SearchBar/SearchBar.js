@@ -16,8 +16,11 @@ export default function SearchBar() {
 
     const handleOnClick = (event) => {
       event.preventDefault()
-      const queryParams = new URLSearchParams(window.location.search)
+      const currentUrl = new URL(window.location.href); // La URL actual (sin query parameter)
+      const queryParams = new URLSearchParams(currentUrl.search) // La URL con algun query param (si existe)
       queryParams.set("search", name)
+      currentUrl.search = queryParams.toString();
+      window.history.pushState({}, '', currentUrl.toString());
       dispatch(getDogByName(name));
     }
 

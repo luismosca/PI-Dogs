@@ -5,9 +5,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 3px solid rgb(105, 129, 0);
+    border-radius: 20px;
+    height: 200px;
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.088);
+    padding: 12px;
+    margin-top: 100px;
+    margin-bottom: 160px;
+    box-shadow: 2px 2px 40px rgba(0, 0, 159, 0.68);
+    margin-left: 530px;
 }
 
 .container-about h1 {
     font-size: larger;
     color: rgb(4, 31, 54);
+    
 }

@@ -12,7 +12,8 @@ const About = () => {
         <div className="container-about">
 
             <h1>Projecto Individual</h1>
-            <h1>Luis</h1>
+            <h1>Henry DOGS</h1>
+            <h1>Luis Moscarelli</h1>
 
         </div></>
         

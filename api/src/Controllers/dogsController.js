@@ -95,35 +95,35 @@ try {
     //Por if true en DB con id: 
     const dogInDb = await Dog.findOne({ where: { id: id }, includes: [temperaments] });
     res.json(dogInDb);
-  }
-  //bysco dog en API por ID
-  const dogInAPI = await axios.get(`${API_URL}breeds/${id}?key=${API_KEY}`)
-  //tomo la imagen del dog
-  const imageID = dogInAPI.data.reference_image_id
-  //busco todos los dogs en la API
-  const allDogsFromAPI = await axios.get('https://api.thedogapi.com/v1/breeds');
-  //tomo la imagen de cada uno de los dogs
-  const imagen = allDogsFromAPI.data.filter(function(image){
-    return image.image.id === imageID
-  })
-  //tomo la URL de la imagen del dog
-  let imgUrl = imagen[0].image.url
-  //guardo en resultado los datos de los dogs
-  const resultado = {
-    id: dogInAPI.data.id,
-    name: dogInAPI.data.name,
-    height: dogInAPI.data.height.metric,
-    weight: dogInAPI.data.weight.metric,
-    life_span: dogInAPI.data.life_span,
-    temperament: dogInAPI.data.temperament,
-    image: imgUrl
+  }else {
+    //bysco dog en API por ID
+    const dogInAPI = await axios.get(`${API_URL}breeds/${id}?key=${API_KEY}`)
+    //tomo la imagen del dog
+    const imageID = dogInAPI.data.reference_image_id
+    //busco todos los dogs en la API
+    const allDogsFromAPI = await axios.get('https://api.thedogapi.com/v1/breeds');
+    //tomo la imagen de cada uno de los dogs
+    const imagen = allDogsFromAPI.data.filter(function(image){
+      return image.image.id === imageID
+    })
+    //tomo la URL de la imagen del dog
+    let imgUrl = imagen[0].image.url
+    //guardo en resultado los datos de los dogs
+    const resultado = {
+      id: dogInAPI.data.id,
+      name: dogInAPI.data.name,
+      height: dogInAPI.data.height.metric,
+      weight: dogInAPI.data.weight.metric,
+      life_span: dogInAPI.data.life_span,
+      temperament: dogInAPI.data.temperament,
+      image: imgUrl
+      }
+
+    //retorno el resultado  
+    if (resultado){
+      res.json(resultado)
     }
-
-  //retorno el resultado  
-  if (resultado){
-    res.json(resultado)
   }
-
 } catch (error) {
   res.status(404).json({error: error.message})
 }

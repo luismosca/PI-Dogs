@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { createDog, getTemperaments} from "../../redux/actions/actions";
 import Navbar from '../Nav/Navbar';
 import './DogCreate.css';
@@ -12,11 +12,13 @@ const DogCreate = () => {
 
     const [dog, setDog] = useState({
         name: "",
+				height: "",
+				weight: "",
         heightMin: "",
         heightMax: "",
         weightMin: "",
         weightMax: "",
-        lifeSpan: "",
+        life_span: "",
         image: "",
         temperaments: []
     });
@@ -46,10 +48,10 @@ const DogCreate = () => {
 		const obj = {
 			name: dog.name,
 			heightMin: dog.heightMin,
-            heightMax: dog.heightMax,
+      heightMax: dog.heightMax,
 			weightMin: dog.weightMin,
-            weightMax: dog.weightMax,
-			lifeSpan: dog.lifeSpan,
+      weightMax: dog.weightMax,
+			life_span: dog.life_span,
 			image: dog.image,
 			temperaments: dog.temperaments,
 			
@@ -60,7 +62,7 @@ const DogCreate = () => {
 			alert('Hey! falta el nombre.');
 			return;
 		}
-		if (!obj.lifeSpan) {
+		if (!obj.life_span) {
 			alert('Hey! aun falta la Esperansa de vida.');
 			return;
 		}
@@ -89,17 +91,28 @@ const DogCreate = () => {
 			return;
 		}
 
-        dispatch(createDog(obj));
+		const newobj = {
+			name: dog.name,
+			height: dog.heightMin + " - " + dog.heightMax,
+			weight: dog.weightMin + " - " + dog.weightMax,
+			life_span: dog.life_span,
+			temperaments: dog.temperaments,
+			image: dog.image,
+		};
+
+    dispatch(createDog(newobj));
 		e.target.reset();
 		alert('Dog creado correctamente !');
 
         setDog({
             name: "",
+						height: "",
+						weight: "",
             heightMin: "",
             heightMax: "",
             weightMin: "",
             weightMax: "",
-            lifeSpan: "",
+            life_span: "",
             image: "",
             temperaments: []
         })
@@ -133,14 +146,14 @@ const DogCreate = () => {
 								<input
 									className='label'
 									type='text'
-									name='description'
+									name='heightMin'
 									value={dog.heightMin}
 								></input>
                                 <label> Máxima: </label>
 								<input
 									className='label'
 									type='text'
-									name='description'
+									name='heightMax'
 									value={dog.heightMax}
 								></input>
 							</div>
@@ -149,14 +162,14 @@ const DogCreate = () => {
 								<input
 									className='label'
 									type='text'
-									name='description'
+									name='weightMin'
 									value={dog.weightMin}
 								></input>
                                 <label> Máxima: </label>
 								<input
 									className='label'
 									type='text'
-									name='description'
+									name='weightMax'
 									value={dog.weightMax}
 								></input>
 							</div>
@@ -165,8 +178,8 @@ const DogCreate = () => {
 								<input
 									className='label'
 									type='text'
-									name='released'
-									value={dog.lifeSpan}
+									name='life_span'
+									value={dog.life_span}
 								></input>
 							</div>
                         </div>
@@ -183,16 +196,16 @@ const DogCreate = () => {
                     <div className='checkboxs'>
 						<div className='checks'>
 							<label>-Temperaments: </label>
-							<div className='gendivs'>
-								<div>
-									{temperaments.map((ten) => (
-										<div key={ten.name}>
+							<div className='tempdivs'>
+								<div className="temperament-container">
+									{temperaments.map((temp) => (
+										<div key={temp.name}>
 											<input
 												type='checkbox'
 												name='temperaments'
-												value={ten.name}
+												value={temp.name}
 											></input>
-											<label name={ten}>{ten.name}</label>
+											<label name={temp}>{temp.name}</label>
 										</div>
 									))}
 								</div>
@@ -201,13 +214,12 @@ const DogCreate = () => {
 						</div>
 						
 					</div>
-                       
-                </div>
-                <button className='button' type='submit'>
+        </div>
+          <button className='button' type='submit'>
 						CREAR!
 					</button>
             </form>
-        </div>
+      </div>
     )
 }
 

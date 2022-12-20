@@ -1,5 +1,6 @@
+/* eslint-disable no-restricted-globals */
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDogDetail } from "../../redux/actions/actions";
 import Navbar from '../Nav/Navbar';
@@ -40,9 +41,7 @@ const DogDetail = (props) => {
                     
         </div>
       </div>
-      <Link to="/home">
-        <button className="button" type="submit">Back</button>
-      </Link>
+      <button className="button" type="submit" onClick={() => history.back()}>Back</button>
       </div>    
     </div>
     )

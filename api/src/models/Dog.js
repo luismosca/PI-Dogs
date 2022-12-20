@@ -16,16 +16,16 @@ module.exports = (sequelize) => {
     },
     height: {
       type: DataTypes.STRING,
-      get() {
-        return this.getDataValue('height') + ' cm.'
-      },
+      // get() {
+      //   return this.getDataValue('height') + ' cm.'
+      // },
       allowNull: false,
     },
     weight: {
       type: DataTypes.STRING,
-      get() {
-        return this.getDataValue('weight') + ' kg.'
-      },
+      // get() {
+      //   return this.getDataValue('weight') + ' kg.'
+      // },
       allowNull: false,
     },
     life_span: {

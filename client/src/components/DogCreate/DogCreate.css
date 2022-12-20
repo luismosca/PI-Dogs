@@ -3,7 +3,6 @@
 .form{
     border: 1px solid rgb(105, 129, 0);
     border-radius: 20px;
-    height: 500px;
     width: 650px;
     background-color: rgba(255, 255, 255, 0.088);
     padding: 5px;
@@ -49,9 +48,14 @@
     margin-bottom: 30px;
 }
 
-.gendivs{
+.tempdivs{
+    display: inline-block;
+}
+
+.temperament-container {
     display: flex;
-    
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .perro{
@@ -62,9 +66,9 @@
 .checks{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    justify-content: left;
+    align-items:center;
+    align-content:stretch;
 }
 
 

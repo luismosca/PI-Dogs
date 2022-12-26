@@ -6,6 +6,8 @@ export const GET_DOG_DETAILS = "GET_DOG_DETAILS";
 export const GET_DOG_BY_NAME = "GET_DOG_BY_NAME";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTES";
 export const CREATE_DOG = "CREATE_DOG";
+export const FILTER_BY_TEMPERAMENT = "FILTER_BY_TEMPERAMENT"
+export const ORDER_BY_NAME = "ORDER_BY_NAME"
 
 //* Trae todos los dogs (DB + API)
 export function getAllDogs() {
@@ -66,3 +68,52 @@ export function createDog(dogs){
       return response
   }
 }
+
+//* Ordenamiento
+export function orderByName(order) {
+  console.log(order)
+  return async function (dispatch) {
+    dispatch({ type: ORDER_BY_NAME, payload: order });
+  };
+}
+
+//* Filtrado
+export function filterByTemperament(filtro) {
+  console.log(filtro)
+  return async function (dispatch) {
+    dispatch({ type: FILTER_BY_TEMPERAMENT, payload: filtro });
+  };
+}
+
+
+// export const filterByTemperament = (temperaments) => (dispatch, getState) => {
+//   let filteredDogs = [];
+
+//   if (temperaments === "All") {
+//     filteredDogs = getState().dogs;
+//   } else {
+//     filteredDogs = getState().dogs.filter((dog) =>
+//       (dog.temperaments).includes(temperaments)
+//     )
+//   };
+//   dispatch({
+//     type: "FILTER_BY_TEMPERAMENT",
+//     payload: {
+//       temperaments,
+//       videogameGenre: filteredDogs,
+//     },
+//   });
+// };
+
+// export const orderByDB = (source) => (dispatch, getState) => {
+//   const dogs = getState().dogs.filter(function (d) {
+//       return d.source === source
+//     });
+//   dispatch({
+//     type: "ORDER_BY_DB",
+//     payload: {
+//       dogs,
+//       source,
+//     },
+//   });
+// };

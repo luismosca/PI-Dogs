@@ -13,7 +13,9 @@ router.get('/', async (req, res) => {
     //Busco todos los Dogs de la API
     const apiDogs = await axios.get('https://api.thedogapi.com/v1/breeds');
     //Guardo todos los temperamentos
-    const temperaments = apiDogs.data.map((t) => t.temperament)
+    const temperamentsArr = apiDogs.data.map((t) => t.temperament)
+    //ordeno alfabeticamente los temperamentos
+    const temperaments = temperamentsArr.sort()
     //Guardo en un array los temperamentos por separado en strings de cada uno de ellos
     for (let i=0; i<temperaments.length; i++){
       if (temperaments[i]) {

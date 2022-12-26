@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom'
 
 const DogCards = (props) => {
     console.log("estoy en DogsCards")
-    //console.log(props.id)
-    //console.log(props.name)
+    // console.log(props.id)
+    // console.log(props.temperament)
     return (
         <div className="cards" style={{backgroundImage: `url(${props.image})`}}>
             <div className="dog-info-container">

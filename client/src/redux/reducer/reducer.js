@@ -4,6 +4,8 @@ import {
   GET_DOG_BY_NAME,
   GET_TEMPERAMENTS,
   CREATE_DOG,
+  FILTER_BY_TEMPERAMENT,
+  ORDER_BY_NAME,
 } from "../actions/actions";
 
 const initialState = {
@@ -11,6 +13,10 @@ const initialState = {
   dogDetails: {},
   dogSearch: [],
   temperaments: [],
+  filteredDogs: [],
+  dogsBackUp: [],
+  // orderBy: "Select",
+  // filterBy: "All",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -20,27 +26,76 @@ const rootReducer = (state = initialState, action) => {
       return {
           ...state,
           allDogs: action.payload,
+          filteredDogs: action.payload,
+          dogsBackUp: action.payload
       };
-      case GET_DOG_DETAILS:
+  case GET_DOG_DETAILS:
       return {
           ...state,
           dogDetails: action.payload,
       };
-      case GET_DOG_BY_NAME:
-          return {
-          ...state,
-          dogSearch: action.payload,         
-      };
-      case GET_TEMPERAMENTS:
-          return {
-            ...state,
-            temperaments: action.payload
-      };
-      case CREATE_DOG:
+  case GET_DOG_BY_NAME:
       return {
           ...state,
-          allDogs: [...state.allDogs, action.payload],
+          dogSearch: action.payload,
+          filteredDogs: action.payload,
+          dogsBackUp: action.payload        
       };
+  case GET_TEMPERAMENTS:
+      return {
+          ...state,
+          temperaments: action.payload
+      };
+  case CREATE_DOG:
+      return {
+        ...state,
+        allDogs: [...state.allDogs, action.payload],
+      };
+  case FILTER_BY_TEMPERAMENT:
+      if (action.payload === 'default'){
+        return {...state, filteredDogs: state.dogsBackUp}
+      }
+                      
+      if(action.payload === 'db'){
+        return {...state, filteredDogs: state.dogsBackUp.filter((dog)=> dog.origin === 'db')}
+      }
+                      
+      if(action.payload === 'api'){
+        return {...state, filteredDogs: state.dogsBackUp.filter((dog)=> dog.origin === 'api')}
+      }else {
+        return {...state, filteredDogs: state.dogsBackUp.filter((dog) => {
+          return dog.temperaments.find((temperament) => {
+            return temperament === action.payload})
+        })}
+      };
+
+    case ORDER_BY_NAME:
+      if(action.payload === 'A-Z'){
+        return {...state, filteredDogs: [...state.filteredDogs].sort((prev, next) => {
+          if(prev.name > next.name) return 1
+            if(prev.name < next.name) return -1
+              return 0
+          })}}
+                      
+      if(action.payload === 'Z-A'){
+        return {...state, filteredDogs: [...state.filteredDogs].sort((prev, next) => {
+          if(prev.name > next.name) return -1
+            if(prev.name < next.name) return 1
+              return 0
+          })}}
+                      
+      if(action.payload === 'desc'){
+        return {...state, filteredDogs: [...state.filteredDogs].sort((prev,next) => 
+          parseInt(prev.weight.slice(0, 3)) - parseInt(next.weight.slice(0,3)))}
+            
+        }
+                      
+      if(action.payload === 'asc'){
+        return {...state, filteredDogs: [...state.filteredDogs].sort((prev,next) =>
+          parseInt(next.weight.slice(0,3) - parseInt(prev.weight.slice(0,3))))}
+        }else {
+          return {...state, filteredDogs: state.dogsBackUp}
+        };
 
   default:
       return { ...state };

@@ -1,0 +1,23 @@
+.paginado {
+    position:static;
+	bottom: 0;
+	background: #100a1f;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 10px;
+}
+
+.paginado button{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+}
+
+.item button:hover {
+    cursor: pointer;
+    font-size: 100%;
+    text-shadow: 0 0 5px #fff,
+}

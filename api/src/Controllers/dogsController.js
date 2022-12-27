@@ -29,7 +29,7 @@ const getDogs = async (req, res) => {
       let allSearchedDogs = []
       // Busco en la API
       const allDogsByName = await axios.get(`${API_URL}breeds/search?q=${name}`)
-      //console.log(allDogsByName.data) 
+      
       //busco todos los dogs de la API
       const allDogsFromAPI = await axios.get('https://api.thedogapi.com/v1/breeds');
       allDogsByName.data.map(dog => {
@@ -71,7 +71,7 @@ const getDogs = async (req, res) => {
     }
 
   } else {
-    //console.log('voy por todos los dogs')
+    
     let results = await getAllDogs()
     res.status(200).json(results);
     

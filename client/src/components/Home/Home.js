@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../../components/Nav/Navbar';
 import DogsCards from "../Dogs/DogsCards";
-import { getAllDogs, getDogByName } from "../../redux/actions/actions";
+import { getAllDogs, getDogByName, clearAll } from "../../redux/actions/actions";
 import '../Home/Home.css'
 import Paginado from "../Pagination/Paginado";
 import FilteredBy from '../../components/Filter/Filter';
@@ -45,10 +45,12 @@ const Home = () => {
     }
 
     useEffect(() => {
+        dispatch(clearAll());
         dispatch(getAllDogs())
     }, [dispatch])
 
     useEffect(() => {
+        dispatch(clearAll());
         setQueryParam("home")
         if (queryParams.get("search")) {
             dispatch(getDogByName(queryParams.get("search")))
@@ -67,7 +69,7 @@ const Home = () => {
         return (
             <>
             <Navbar showSearch={true}/>
-            <h3>Search - Dogs Cards</h3>
+            <h3>Search - Dogs</h3>
             <FilteredBy />
             <Paginado
                 dogsPerPage={dogsPerPage}
@@ -94,7 +96,7 @@ const Home = () => {
         return (
             <>
             <Navbar showSearch={true}/>
-            <h3>Home - Dogs Cards</h3>
+            <h3>Home - Dogs</h3>
 
             <FilteredBy />
             <Paginado
@@ -120,9 +122,11 @@ const Home = () => {
         )
     } else{
         return(
-            <>
-            <h1>Loading...</h1>
-            </>
+            
+                <div class="load">
+                    <h3>Loading...</h3>
+                </div>
+            
         )
     }
 

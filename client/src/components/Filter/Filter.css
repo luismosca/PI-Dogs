@@ -1,8 +1,11 @@
-.container-div{
+.container-div {
     display: flex;
     justify-content: center;
 }
 
+.cargar {
+    align-content: center;
+}
 .selectCont {
     padding: 10px;
     margin: 20px;

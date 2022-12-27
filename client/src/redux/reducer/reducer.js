@@ -6,6 +6,7 @@ import {
   CREATE_DOG,
   FILTER_BY_TEMPERAMENT,
   ORDER_BY_NAME,
+  CLEAR_ALL,
 } from "../actions/actions";
 
 const initialState = {
@@ -63,9 +64,15 @@ const rootReducer = (state = initialState, action) => {
       if(action.payload === 'api'){
         return {...state, filteredDogs: state.dogsBackUp.filter((dog)=> dog.origin === 'api')}
       }else {
+        
         return {...state, filteredDogs: state.dogsBackUp.filter((dog) => {
-          return dog.temperaments.find((temperament) => {
-            return temperament === action.payload})
+          if(dog.temperament) {
+            //convierto el string de temperaments en un array para aplicar el includes
+            const dogTempsString = dog.temperament
+            const dogTempsArr = dogTempsString.split(', ')
+            return dogTempsArr.includes(action.payload)
+          }
+          return false
         })}
       };
 
@@ -96,7 +103,16 @@ const rootReducer = (state = initialState, action) => {
         }else {
           return {...state, filteredDogs: state.dogsBackUp}
         };
-
+    case CLEAR_ALL:
+      return {
+        ...state,
+        //allDogs: [],
+        dogSearch: [],
+        filteredDogs: [],
+        dogsBackUp: [],
+        //orderBy: "Select",
+        //filterBy: "All",
+      }
   default:
       return { ...state };
   }

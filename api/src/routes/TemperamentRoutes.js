@@ -3,9 +3,7 @@ const axios = require("axios");
 const { Dog, Temperament } = require('../db');
 const router = Router();
 
-router.get('/', async (req, res) => {
-
-  //console.log('Soy la ruta Temperaments')
+router.get('/', async (req, res) => { 
   let arrayTemperaments = [];
   let arrayFinal = [];
 

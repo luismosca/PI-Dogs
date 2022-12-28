@@ -15,17 +15,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     height: {
-      type: DataTypes.STRING,
-      // get() {
-      //   return this.getDataValue('height') + ' cm.'
-      // },
+      type: DataTypes.STRING, 
       allowNull: false,
     },
     weight: {
       type: DataTypes.STRING,
-      // get() {
-      //   return this.getDataValue('weight') + ' kg.'
-      // },
       allowNull: false,
     },
     life_span: {

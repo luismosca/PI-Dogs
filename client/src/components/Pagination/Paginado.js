@@ -25,7 +25,5 @@ export default function Paginado({dogsPerPage, dogSearch, allDogs, paginado}){
         ))}
       </ul>
     </nav>
-  )
-    
-  
+  ) 
 }

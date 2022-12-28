@@ -123,7 +123,7 @@ const DogCreate = () => {
         <div>
             <Navbar showSearch={false}/>
             <h1>Create DOG</h1>
-            <h3>Complete las caracteristicas de su nuevo Dog</h3>
+            <h3>Complete the characteristics of your new dog:</h3>
             <form id='survey-form'
 				className='form'
 				noValidate
@@ -133,7 +133,7 @@ const DogCreate = () => {
 					<div>
 						<div className='divTitles'>
 							<div>
-								<label>-Name: </label>
+								<label><strong>-Name: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -142,14 +142,14 @@ const DogCreate = () => {
 								></input>
 							</div>
                             <div>
-								<label>-Height: Minima: </label>
+								<label><strong>-Height: Minima: </strong></label>
 								<input
 									className='label'
 									type='text'
 									name='heightMin'
 									value={dog.heightMin}
 								></input>
-                                <label> Máxima: </label>
+                <label><strong> Máxima: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -157,15 +157,15 @@ const DogCreate = () => {
 									value={dog.heightMax}
 								></input>
 							</div>
-                            <div>
-								<label>-Weight: Minima: </label>
+                <div>
+								<label><strong>-Weight: Minima: </strong></label>
 								<input
 									className='label'
 									type='text'
 									name='weightMin'
 									value={dog.weightMin}
 								></input>
-                                <label> Máxima: </label>
+                <label><strong> Máxima: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -173,8 +173,8 @@ const DogCreate = () => {
 									value={dog.weightMax}
 								></input>
 							</div>
-                            <div>
-								<label>-Life Span: </label>
+                <div>
+								<label><strong>-Life Span: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -182,9 +182,9 @@ const DogCreate = () => {
 									value={dog.life_span}
 								></input>
 							</div>
-                        </div>
-                        <div className='imagediv'>
-							<label>-Image URL: </label>
+              </div>
+              <div className='imagediv'>
+							<label><strong>-Image URL: </strong></label>
 							<input
 								className='imagein'
 								type='text'
@@ -192,10 +192,10 @@ const DogCreate = () => {
 								value={dog.image}
 							></input>
 						</div>
-                    </div>
-                    <div className='checkboxs'>
+            </div>
+            <div className='checkboxs'>
 						<div className='checks'>
-							<label>-Temperaments: </label>
+							<label><strong>-Temperaments: </strong></label>
 							<div className='tempdivs'>
 								<div className="temperament-container">
 									{temperaments.map((temp) => (

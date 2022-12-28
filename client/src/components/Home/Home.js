@@ -6,26 +6,20 @@ import { getAllDogs, getDogByName, clearAll } from "../../redux/actions/actions"
 import '../Home/Home.css'
 import Paginado from "../Pagination/Paginado";
 import FilteredBy from '../../components/Filter/Filter';
-//import { all } from "axios";
 
 const Home = () => {
     const dispatch= useDispatch()
     
-    //estado de filtrado y ordenamiento
-    // const filteredDogs = useSelector((state) => state.filteredDogs);
-	// const filterBy = useSelector((state) => state.filterBy);
-	// const orderBy = useSelector((state) => state.orderBy);
-
-    //estado de los Dogs
+    //defino todos los estados de los Dogs
     const error = useSelector(state=>state.error)
     const allDogs = useSelector(state=>state.allDogs)
     const dogSearch = useSelector(state=>state.dogSearch)
     const filteredDogs = useSelector(state=>state.filteredDogs)
+
+    //lo siguiente para determinar en que ruta estoy parado, si la home o la del search
     const queryParams = new URLSearchParams(window.location.search)
     const [queryParam, setQueryParam] = useState(queryParams.get("search") ? queryParams.get("search") : "home")
     
-    console.log(filteredDogs)
-
     //Set pages en 8
     //estado para las paginas
     const [currentPage, setcurrentPage] = useState(1)
@@ -97,7 +91,6 @@ const Home = () => {
             <>
             <Navbar showSearch={true}/>
             <h3>Home - Dogs</h3>
-
             <FilteredBy />
             <Paginado
                 dogsPerPage={dogsPerPage}

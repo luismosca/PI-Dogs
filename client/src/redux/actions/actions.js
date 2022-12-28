@@ -22,7 +22,7 @@ export function getAllDogs() {
   };
 }
 
-// detalles del dog por pasado por:ID)
+// detalles del dog por pasado por:ID
 export function getDogDetail(id) {
   return async function (dispatch) {
     return await axios.get(`http://localhost:3001/breeds/${id}`)
@@ -36,7 +36,7 @@ export function getDogDetail(id) {
   };
   
 }
-
+// obtengo el dog por nombre
 export function getDogByName(name) {
   return function (dispatch) {
     return axios.get(`http://localhost:3001/breeds?name=${name}`)
@@ -62,7 +62,7 @@ export function getTemperaments() {
       });
   };
 }
-
+// funcion para crear un nuevo Dog
 export function createDog(dogs){
   return async function(){
       const response = await axios.post('http://localhost:3001/dogcreate', dogs)
@@ -70,26 +70,24 @@ export function createDog(dogs){
   }
 }
 
-//* Ordenamiento
+// Ordenamiento
 export function orderByName(order) {
-  //console.log(order)
   return async function (dispatch) {
     dispatch({ type: ORDER_BY_NAME, payload: order });
   };
 }
 
-//* Filtrado
-export function filterByTemperament(filtro) {
-  //console.log(filtro)
+// Filtrado
+export function filterByTemperament(filtro) { 
   return async function (dispatch) {
     dispatch({ type: FILTER_BY_TEMPERAMENT, payload: filtro });
   };
 }
-
+// para limpiar pagina de todo
 export const clearAll = () => {
   return (dispatch) => {
     dispatch({
-      type: "CLEAR_ALL",
+      type: CLEAR_ALL,
     });
   };
 };

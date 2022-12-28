@@ -15,9 +15,7 @@ const initialState = {
   dogSearch: [],
   temperaments: [],
   filteredDogs: [],
-  dogsBackUp: [],
-  // orderBy: "Select",
-  // filterBy: "All",
+  dogsBackUp: [], 
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -106,12 +104,9 @@ const rootReducer = (state = initialState, action) => {
     case CLEAR_ALL:
       return {
         ...state,
-        //allDogs: [],
         dogSearch: [],
         filteredDogs: [],
         dogsBackUp: [],
-        //orderBy: "Select",
-        //filterBy: "All",
       }
   default:
       return { ...state };

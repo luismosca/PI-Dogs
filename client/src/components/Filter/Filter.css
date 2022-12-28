@@ -1,6 +1,7 @@
 .container-div {
     display: flex;
     justify-content: center;
+    background-color: gray;
 }
 
 .cargar {
@@ -12,6 +13,7 @@
     width: 400px;
     font-family: 'Press Start 2P';
     border-radius: 20px;
+    background-color: rgb(111, 207, 236);
 }
 
 .option {

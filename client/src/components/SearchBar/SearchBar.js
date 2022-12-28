@@ -23,8 +23,7 @@ export default function SearchBar() {
       window.history.pushState({}, '', currentUrl.toString());
       dispatch(getDogByName(name));
     }
-
-    
+ 
     return (
       <div className="searchbar-div">
         <input

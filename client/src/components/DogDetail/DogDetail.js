@@ -8,8 +8,6 @@ import "./DogDetail.css";
 
 const DogDetail = (props) => {
   
-  console.log("Estoy en DogDatail con ID: ", props.match.params.id)
-  
   const dispatch = useDispatch();
   const {id} = useParams()
   

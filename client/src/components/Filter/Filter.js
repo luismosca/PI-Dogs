@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux'
 import { getTemperaments,	filterByTemperament, orderByName, clearAll } from '../../redux/actions/actions';
 import './Filter.css';
@@ -29,7 +29,7 @@ function FilteredBy({temperaments}) {
 	return (
 			<div>
 					<div className='cargar'>
-						<button onClick={handleButton}>Refresh</button>
+						<button onClick={handleButton}>Refresh Page</button>
 					</div>
 					<div className='container-div'>
 

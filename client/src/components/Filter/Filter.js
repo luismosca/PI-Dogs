@@ -18,8 +18,10 @@ function FilteredBy({temperaments}) {
 	}
 
 	const handleButton = (e) => {
+		window.location.reload()
 		e.preventDefault()
 		dispatch(clearAll())
+		
 	}
 
 	useEffect(() => {

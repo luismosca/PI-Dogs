@@ -16,9 +16,7 @@ const DogCreate = () => {
 		function handleSelect(data) {
 			setSelectedOptions(data);
 		}
-
-		console.log(selectedOptions)
-
+		//para el combobox drop down de los temperamentos
 		const dropdownTemperaments = temperaments.map(t => {
 			return {value: t.name, label: t.name}
 		})
@@ -117,9 +115,7 @@ const DogCreate = () => {
 			image: dog.image
 		};
 
-		console.log(newobj)
-
-    dispatch(createDog(newobj));
+		dispatch(createDog(newobj));
 		e.target.reset();
 		alert('Dog creado correctamente !');
 

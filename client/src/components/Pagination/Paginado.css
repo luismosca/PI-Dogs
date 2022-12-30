@@ -22,3 +22,24 @@
     font-size: 100%;
     text-shadow: 0 0 5px #fff,
 }
+
+.pag-actual {
+    background-color: #5c5c5c;
+    width: 30px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    cursor: pointer;
+}
+
+.sig-pag, .cant-paginas, .ant-pag {
+    display: flex;
+    align-items: center;
+}
+
+.sig-pag button, .ant-pag button {
+    border-radius: 6px;
+    padding: 5px;
+}

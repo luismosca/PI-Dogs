@@ -21,10 +21,10 @@ export default function Paginado({dogsPerPage, dogSearch, allDogs, paginado, pag
   return (
     <nav>
       <ul className="paginado">
-        {paginaActual > 1 && <li><button onClick={() => paginado(paginaActual-1)}>Anterior</button></li>}
-        <li>{paginaActual}</li>
-        <li>de  {pageNumbers.length}</li>
-        {paginaActual < pageNumbers.length && <li><button onClick={() => paginado(paginaActual+1)}>Siguiente</button></li>}
+        {paginaActual > 1 && <li className="ant-pag"><button onClick={() => paginado(paginaActual-1)}>Anterior</button></li>}
+        <li className="pag-actual">{paginaActual}</li>
+        <li className="cant-paginas">de  {pageNumbers.length}</li>
+        {paginaActual < pageNumbers.length && <li className="sig-pag"><button onClick={() => paginado(paginaActual+1)}>Siguiente</button></li>}
       </ul>
     </nav>
   ) 

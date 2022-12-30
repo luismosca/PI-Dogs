@@ -90,14 +90,19 @@ const rootReducer = (state = initialState, action) => {
           })}}
                       
       if(action.payload === 'desc'){
-        return {...state, filteredDogs: [...state.filteredDogs].sort((prev,next) => 
-          parseInt(prev.weight.slice(0, 3)) - parseInt(next.weight.slice(0,3)))}
-            
+        return {...state, filteredDogs: [...state.filteredDogs].sort((prev,next) =>
+          ((parseInt(prev.weight.split(' - ')[0]) + parseInt(prev.weight.split(' - ').length > 1 ?
+           prev.weight.split(' - ')[1] : prev.weight.split(' - ')[0])/2) -
+            ((parseInt(next.weight.split(' - ')[0]) + parseInt(next.weight.split(' - ').length > 1 ?
+             next.weight.split(' - ')[1] : next.weight.split(' - ')[0]))/2)))} 
         }
                       
       if(action.payload === 'asc'){
         return {...state, filteredDogs: [...state.filteredDogs].sort((prev,next) =>
-          parseInt(next.weight.slice(0,3) - parseInt(prev.weight.slice(0,3))))}
+          ((parseInt(next.weight.split(' - ')[0]) + parseInt(next.weight.split(' - ').length > 1 ?
+           next.weight.split(' - ')[1] : next.weight.split(' - ')[0])/2) -
+            ((parseInt(prev.weight.split(' - ')[0]) + parseInt(prev.weight.split(' - ').length > 1 ?
+             prev.weight.split(' - ')[1] : prev.weight.split(' - ')[0]))/2)))}
         }else {
           return {...state, filteredDogs: state.dogsBackUp}
         };

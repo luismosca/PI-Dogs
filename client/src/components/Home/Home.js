@@ -69,6 +69,8 @@ const Home = () => {
                 dogsPerPage={dogsPerPage}
                 dogSearch={dogSearch.length}
                 paginado = {paginado}
+                paginaActual = {currentPage}
+                dogsFiltered = {filteredDogs.length}
                 />
             <div className="cardContainer">
                 {currentSDogs.map(dog=>{
@@ -96,6 +98,8 @@ const Home = () => {
                 dogsPerPage={dogsPerPage}
                 allDogs={allDogs.length}
                 paginado = {paginado}
+                paginaActual = {currentPage}
+                dogsFiltered = {filteredDogs.length}
                 />
             <div className="cardContainer">
                 {currentDogs.map(dog=>{

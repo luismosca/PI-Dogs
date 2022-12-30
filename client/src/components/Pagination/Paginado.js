@@ -2,10 +2,14 @@
 import React from "react";
 import "./Paginado.css";
 
-export default function Paginado({dogsPerPage, dogSearch, allDogs, paginado}){
+export default function Paginado({dogsPerPage, dogSearch, allDogs, paginado, paginaActual, dogsFiltered}){
   const pageNumbers = []
   if (dogSearch){
     for (let i=1; i<=Math.ceil(dogSearch/dogsPerPage); i++){
+      pageNumbers.push(i)
+    }
+  }else if(dogsFiltered) {
+    for (let i=1; i<=Math.ceil(dogsFiltered/dogsPerPage); i++){
       pageNumbers.push(i)
     }
   }else{
@@ -17,12 +21,10 @@ export default function Paginado({dogsPerPage, dogSearch, allDogs, paginado}){
   return (
     <nav>
       <ul className="paginado">
-        { pageNumbers && 
-        pageNumbers.map((number) => (
-          <li className="item" key={number}>
-            <button onClick={() => paginado(number)}>{number}</button>
-          </li>
-        ))}
+        {paginaActual > 1 && <li><button onClick={() => paginado(paginaActual-1)}>Anterior</button></li>}
+        <li>{paginaActual}</li>
+        <li>de  {pageNumbers.length}</li>
+        {paginaActual < pageNumbers.length && <li><button onClick={() => paginado(paginaActual+1)}>Siguiente</button></li>}
       </ul>
     </nav>
   ) 

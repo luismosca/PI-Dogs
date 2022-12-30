@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
 //import { Link } from "react-router-dom";
 import { createDog, getTemperaments} from "../../redux/actions/actions";
 import Navbar from '../Nav/Navbar';
@@ -7,8 +8,20 @@ import './DogCreate.css';
 
 
 const DogCreate = () => {
+
     const dispatch = useDispatch();
     const temperaments = useSelector((state) => state.temperaments)
+		
+		const [selectedOptions, setSelectedOptions] = useState();
+		function handleSelect(data) {
+			setSelectedOptions(data);
+		}
+
+		console.log(selectedOptions)
+
+		const dropdownTemperaments = temperaments.map(t => {
+			return {value: t.name, label: t.name}
+		})
 
     const [dog, setDog] = useState({
         name: "",
@@ -91,14 +104,20 @@ const DogCreate = () => {
 			return;
 		}
 
+		const selectedTemperaments = selectedOptions.map(t => {
+			return t.value
+		})
+
 		const newobj = {
 			name: dog.name,
 			height: dog.heightMin + " - " + dog.heightMax,
 			weight: dog.weightMin + " - " + dog.weightMax,
 			life_span: dog.life_span,
-			temperaments: dog.temperaments,
-			image: dog.image,
+			temperaments: selectedTemperaments,
+			image: dog.image
 		};
+
+		console.log(newobj)
 
     dispatch(createDog(newobj));
 		e.target.reset();
@@ -196,7 +215,21 @@ const DogCreate = () => {
             <div className='checkboxs'>
 						<div className='checks'>
 							<label><strong>-Temperaments: </strong></label>
-							<div className='tempdivs'>
+
+							<div className="app">
+								<div className="dropdown-container">
+									<Select
+										options={dropdownTemperaments}
+										placeholder="Select temperament"
+										value={selectedOptions}
+										onChange={handleSelect}
+										isSearchable={true}
+										isMulti
+									/>
+								</div>
+							</div>
+
+							{/* <div className='tempdivs'>
 								<div className="temperament-container">
 									{temperaments.map((temp) => (
 										<div key={temp.name}>
@@ -209,8 +242,7 @@ const DogCreate = () => {
 										</div>
 									))}
 								</div>
-								
-							</div>
+							</div> */}
 						</div>
 						
 					</div>

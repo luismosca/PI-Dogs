@@ -1,12 +1,13 @@
 .paginado {
     position:static;
 	bottom: 0;
-	background: #100a1f;
+	background: gray;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	gap: 20px;
 	padding: 10px;
+    list-style: none;
 }
 
 .paginado button{

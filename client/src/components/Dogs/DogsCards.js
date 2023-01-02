@@ -12,7 +12,7 @@ const DogCards = (props) => {
                     <div className="info-container">
                         <h3>{props.name}</h3>
                         <h3>{props.temperament}</h3>
-                        <h3>{props.weight} Kg.</h3>
+                        <h3>{props.weight !== "NaN" ? props.weight : "5"} Kg.</h3>
                     </div>
                 <div className="div-button">
                     {props.id && (

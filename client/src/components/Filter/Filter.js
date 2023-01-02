@@ -21,6 +21,7 @@ function FilteredBy({temperaments}) {
 		window.location.reload()
 		e.preventDefault()
 		dispatch(clearAll())
+		
 	}
 
 	useEffect(() => {

@@ -3,7 +3,6 @@ import '../LandingPage/LandingPage.css'
 export default function LandingPage() {
   return (
     <div className="MyImage">
-        {/* <img src="../Img/apolloDog.jpg" alt="lpage" /> */}
         <Link to="/home">
           <button className="myButton">Let's Go!!</button>
         </Link>

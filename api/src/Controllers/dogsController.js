@@ -87,14 +87,29 @@ const getDog = async (req, res) => {
       attributes: []
     }
   }
-
+  
 try {
   const regex = /([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/
 
   if (regex.test(id)){
     //Por if true en DB con id: 
-    const dogInDb = await Dog.findOne({ where: { id: id }, includes: [temperaments] });
-    res.json(dogInDb);
+    const dogInDB = await Dog.findOne({ where: {id},
+      include: {model: Temperament, attributes: ['name'],
+      through: {attributes: []}}})
+      let d = dogInDB
+      const information = {
+          id: d.id,
+          name: d.name,
+          image: d.image,
+          height: d.height,
+          weight: d.weight,
+          life_span: d.life_span,
+          temperament: d.temperaments.map(p => p.name).join(", ")
+      }
+      return res.json(information)
+    // const dogInDb = await Dog.findOne({ where: { id: id }, includes: [temperaments] });
+    // res.json(dogInDb);
+    
   }else {
     //bysco dog en API por ID
     const dogInAPI = await axios.get(`${API_URL}breeds/${id}?key=${API_KEY}`)

@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
 //import { Link } from "react-router-dom";
 import { createDog, getTemperaments} from "../../redux/actions/actions";
 import Navbar from '../Nav/Navbar';
@@ -7,13 +8,23 @@ import './DogCreate.css';
 
 
 const DogCreate = () => {
+
     const dispatch = useDispatch();
     const temperaments = useSelector((state) => state.temperaments)
+		
+	const [selectedOptions, setSelectedOptions] = useState();
+	function handleSelect(data) {
+		setSelectedOptions(data);
+	}
+	//para el combobox drop down de los temperamentos
+	const dropdownTemperaments = temperaments.map(t => {
+		return {value: t.name, label: t.name}
+	})
 
     const [dog, setDog] = useState({
         name: "",
-				height: "",
-				weight: "",
+		height: "",
+		weight: "",
         heightMin: "",
         heightMax: "",
         weightMin: "",
@@ -48,9 +59,9 @@ const DogCreate = () => {
 		const obj = {
 			name: dog.name,
 			heightMin: dog.heightMin,
-      heightMax: dog.heightMax,
+      		heightMax: dog.heightMax,
 			weightMin: dog.weightMin,
-      weightMax: dog.weightMax,
+     		weightMax: dog.weightMax,
 			life_span: dog.life_span,
 			image: dog.image,
 			temperaments: dog.temperaments,
@@ -91,23 +102,27 @@ const DogCreate = () => {
 			return;
 		}
 
+		const selectedTemperaments = selectedOptions.map(t => {
+			return t.value
+		})
+
 		const newobj = {
 			name: dog.name,
 			height: dog.heightMin + " - " + dog.heightMax,
 			weight: dog.weightMin + " - " + dog.weightMax,
 			life_span: dog.life_span,
-			temperaments: dog.temperaments,
-			image: dog.image,
+			temperaments: selectedTemperaments,
+			image: dog.image
 		};
 
-    dispatch(createDog(newobj));
+		dispatch(createDog(newobj));
 		e.target.reset();
 		alert('Dog creado correctamente !');
 
         setDog({
             name: "",
-						height: "",
-						weight: "",
+			height: "",
+			weight: "",
             heightMin: "",
             heightMax: "",
             weightMin: "",
@@ -149,7 +164,7 @@ const DogCreate = () => {
 									name='heightMin'
 									value={dog.heightMin}
 								></input>
-                <label><strong> Máxima: </strong></label>
+                				<label><strong> Máxima: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -157,7 +172,7 @@ const DogCreate = () => {
 									value={dog.heightMax}
 								></input>
 							</div>
-                <div>
+                			<div>
 								<label><strong>-Weight: Minima: </strong></label>
 								<input
 									className='label'
@@ -165,7 +180,7 @@ const DogCreate = () => {
 									name='weightMin'
 									value={dog.weightMin}
 								></input>
-                <label><strong> Máxima: </strong></label>
+                				<label><strong> Máxima: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -173,7 +188,7 @@ const DogCreate = () => {
 									value={dog.weightMax}
 								></input>
 							</div>
-                <div>
+               				 <div>
 								<label><strong>-Life Span: </strong></label>
 								<input
 									className='label'
@@ -182,8 +197,8 @@ const DogCreate = () => {
 									value={dog.life_span}
 								></input>
 							</div>
-              </div>
-              <div className='imagediv'>
+              			</div>
+              			<div className='imagediv'>
 							<label><strong>-Image URL: </strong></label>
 							<input
 								className='imagein'
@@ -192,32 +207,28 @@ const DogCreate = () => {
 								value={dog.image}
 							></input>
 						</div>
-            </div>
-            <div className='checkboxs'>
+            		</div>
+            		<div className='checkboxs'>
 						<div className='checks'>
 							<label><strong>-Temperaments: </strong></label>
-							<div className='tempdivs'>
-								<div className="temperament-container">
-									{temperaments.map((temp) => (
-										<div key={temp.name}>
-											<input
-												type='checkbox'
-												name='temperaments'
-												value={temp.name}
-											></input>
-											<label name={temp}>{temp.name}</label>
-										</div>
-									))}
+							<div className="app">
+								<div className="dropdown-container">
+									<Select
+										options={dropdownTemperaments}
+										placeholder="Select temperament"
+										value={selectedOptions}
+										onChange={handleSelect}
+										isSearchable={true}
+										isMulti
+									/>
 								</div>
-								
 							</div>
 						</div>
-						
 					</div>
-        </div>
-          <button className='button' type='submit'>
+        		</div>
+          		<button className='button' type='submit'>
 						CREAR!
-					</button>
+				</button>
             </form>
       </div>
     )

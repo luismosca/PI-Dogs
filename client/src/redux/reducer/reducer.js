@@ -90,17 +90,27 @@ const rootReducer = (state = initialState, action) => {
           })}}
                       
       if(action.payload === 'desc'){
-        return {...state, filteredDogs: [...state.filteredDogs].sort((prev,next) => 
-          parseInt(prev.weight.slice(0, 3)) - parseInt(next.weight.slice(0,3)))}
-            
-        }
+        return {...state, filteredDogs: [...state.filteredDogs].sort((a, b) => {
+              const [aMin, aMax] = a.weight.split("-").map(s => parseInt(s.trim()));
+              const [bMin, bMax] = b.weight.split("-").map(s => parseInt(s.trim()));
+              const aWeight = aMin && aMax ? (aMin + aMax) / 2 : a.weight === "NaN" ? 0 : parseInt(a.weight);
+              const bWeight = bMin && bMax ? (bMin + bMax) / 2 : b.weight === "NaN" ? 0 : parseInt(b.weight);
+              return aWeight - bWeight;
+            })};
+          }
                       
       if(action.payload === 'asc'){
-        return {...state, filteredDogs: [...state.filteredDogs].sort((prev,next) =>
-          parseInt(next.weight.slice(0,3) - parseInt(prev.weight.slice(0,3))))}
+        return {...state, filteredDogs: [...state.filteredDogs].sort((a, b) => {
+          const [aMin, aMax] = a.weight.split("-").map(s => parseInt(s.trim()));
+          const [bMin, bMax] = b.weight.split("-").map(s => parseInt(s.trim()));
+          const aWeight = aMin && aMax ? (aMin + aMax) / 2 : a.weight === "NaN" ? 0 : parseInt(a.weight);
+          const bWeight = bMin && bMax ? (bMin + bMax) / 2 : b.weight === "NaN" ? 0 : parseInt(b.weight);
+          return bWeight - aWeight;
+        })};
         }else {
           return {...state, filteredDogs: state.dogsBackUp}
         };
+        
     case CLEAR_ALL:
       return {
         ...state,

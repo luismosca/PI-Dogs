@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 25rem;
-    width: 25rem;
+    height: 30rem;
+    width: 18rem;
     border: 3px black solid;
     margin-bottom: 3rem;
     flex-wrap: wrap;

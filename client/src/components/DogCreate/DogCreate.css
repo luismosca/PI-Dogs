@@ -91,7 +91,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: darkcyan;
   }
-  .dropdown-container {
+
+.dropdown-container {
     width: 300px;
-  }
+    background-color: darkcyan;
+ }

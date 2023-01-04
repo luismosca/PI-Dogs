@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Select from "react-select";
 import { createDog, getTemperaments} from "../../redux/actions/actions";
+import MultiSelect from "../MultiSelect/MultiSelect";
 import Navbar from '../Nav/Navbar';
 import './DogCreate.css';
 
@@ -10,15 +10,29 @@ const DogCreate = () => {
 
     const dispatch = useDispatch();
     const temperaments = useSelector((state) => state.temperaments)
-		
-	const [selectedOptions, setSelectedOptions] = useState();
-	function handleSelect(data) {
-		setSelectedOptions(data);
-	}
+	const [selectedOptions, setSelectedOptions] = useState([]);
+
+	function handleSelect(event) {
+		console.log(selectedOptions)
+    	const selectedValues = [...event.target.options]
+		.filter(option => option.selected)
+		.map(option => option.value);
+
+    	//console.log(selectedValues)
+		//setSelectedOptions([...selectedOptions, ...selectedValues]);
+		if (!selectedOptions.includes(selectedValues[0])){
+			setSelectedOptions([...selectedOptions, ...selectedValues]);
+			console.log(selectedValues[0])
+		}else{
+			setSelectedOptions(selectedOptions.filter(option => option !== selectedValues[0]));
+			console.log(selectedValues[0])
+		}
+			//setSelectedOptions(selectedValues);
+  	}
 	//para el combobox drop down de los temperamentos
-	const dropdownTemperaments = temperaments.map(t => {
-		return {value: t.name, label: t.name}
-	})
+	// const dropdownTemperaments = temperaments.map(t => {
+	// 	return {value: t.name, label: t.name}
+	// })
 
     const [dog, setDog] = useState({
         name: "",
@@ -101,16 +115,16 @@ const DogCreate = () => {
 			return;
 		}
 
-		const selectedTemperaments = selectedOptions.map(t => {
-			return t.value
-		})
+		// const selectedTemperaments = selectedOptions.map(t => {
+		// 	return t.value
+		// })
 
 		const newobj = {
 			name: dog.name,
 			height: dog.heightMin + " - " + dog.heightMax,
 			weight: dog.weightMin + " - " + dog.weightMax,
-			life_span: dog.life_span,
-			temperaments: selectedTemperaments,
+			life_span: dog.life_span + " years",
+			temperaments: selectedOptions,
 			image: dog.image
 		};
 
@@ -212,14 +226,31 @@ const DogCreate = () => {
 							<label><strong>-Temperaments: </strong></label>
 							<div className="app">
 								<div className="dropdown-container">
-									<Select
+									<MultiSelect 
+										options={temperaments}
+										onChange={handleSelect}
+										selectedOptions={selectedOptions}
+									/>
+								{/* <select multiple="multiple" onChange={handleSelect}>
+                            	
+                            	{temperaments.map(d => (                    
+                                <option value={selectedOptions} key={d.id}>{d.name}</option> 
+                            	))}
+                        		</select> */}
+
+								{/* <select name="lenguajes" id="lang" multiple onChange={handleSelect}>
+									<option value={dropdownTemperaments}></option>
+									
+								</select> */}
+
+									{/* <Select
 										options={dropdownTemperaments}
 										placeholder="Select temperament"
 										value={selectedOptions}
 										onChange={handleSelect}
 										isSearchable={true}
 										isMulti
-									/>
+									/> */}
 								</div>
 							</div>
 						</div>

@@ -66,6 +66,13 @@ const Home = () => {
             <Navbar showSearch={true}/>
             <h3>Search - Dogs</h3>
             <FilteredBy />
+            <Paginado
+                dogsPerPage={dogsPerPage}
+                dogSearch={dogSearch.length}
+                paginado = {paginado}
+                paginaActual = {currentPage}
+                dogsFiltered = {filteredDogs.length}
+                />
             <div className="cardContainer">
                 {currentSDogs.map(dog=>{
                     return <DogsCards
@@ -95,6 +102,13 @@ const Home = () => {
             <Navbar showSearch={true}/>
             <h3>Home - Dogs</h3>
             <FilteredBy />
+            <Paginado
+                dogsPerPage={dogsPerPage}
+                allDogs={allDogs.length}
+                paginado = {paginado}
+                paginaActual = {currentPage}
+                dogsFiltered = {filteredDogs.length}
+                />
             <div className="cardContainer">
                 {currentDogs.map(dog=>{
                     return <DogsCards

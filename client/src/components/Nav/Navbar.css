@@ -5,6 +5,7 @@
         justify-content: flex-end;
         align-items: center;
         background: rgb(34, 30, 30);
+        background-image: url(../../Img/fondoDetalle2.jpg);
 }
 
 .navbar-div1 {

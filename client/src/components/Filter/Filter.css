@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     background-color: gray;
+    background-image: url(../../Img/fondoDetalle2.jpg);
 }
 
 .cargar {
@@ -10,7 +11,7 @@
 .selectCont {
     padding: 10px;
     margin: 20px;
-    width: 400px;
+    width: 200px;
     font-family: 'Press Start 2P';
     border-radius: 20px;
     background-color: rgb(111, 207, 236);

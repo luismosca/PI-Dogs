@@ -39,20 +39,12 @@
 }
 
 .button {
-
     font-family: 'Press Start 2P';
     padding: 10px;
     margin: 20px;
     border-radius: 30px;
     border: none;
     background-color: rgb(156, 140, 212);;
-
-    /* font-family: 'Bebas Neue', cursive;
-      color: rgb(79, 82, 255);
-      font-size: 120%;
-      border: solid 1px rgb(202, 202, 202);
-      border-radius:20px;
-      background:none; */
   }
   
   .button:hover {

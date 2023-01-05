@@ -17,18 +17,6 @@
     margin-left: 540px;
 }
 
-.container-vacio {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 200px;
-    width: 250px;
-    padding: 12px;
-    margin-top: 150px;
-    margin-bottom: 100px;
-    margin-left: 540px;
-}
 .container-about h1 {
     font-size: larger;
     color: rgb(4, 31, 54);
@@ -36,8 +24,9 @@
 }
 
 .fondo {
+    height: 100vh;
     background-image: url(../../Img/fondoDetalle2.jpg);
-    background-size:auto;
-    margin-bottom: 0%
+    /* background-size:auto;
+    margin-bottom: 0% */
     ;
 }

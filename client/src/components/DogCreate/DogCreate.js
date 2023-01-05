@@ -13,13 +13,12 @@ const DogCreate = () => {
 	const [selectedOptions, setSelectedOptions] = useState([]);
 
 	function handleSelect(event) {
-		console.log(selectedOptions)
+		
     	const selectedValues = [...event.target.options]
 		.filter(option => option.selected)
 		.map(option => option.value);
 
-    	//console.log(selectedValues)
-		//setSelectedOptions([...selectedOptions, ...selectedValues]);
+		//para controlar el multiselect, seleccionar y sacar de la selleccion
 		if (!selectedOptions.includes(selectedValues[0])){
 			setSelectedOptions([...selectedOptions, ...selectedValues]);
 			console.log(selectedValues[0])
@@ -27,13 +26,8 @@ const DogCreate = () => {
 			setSelectedOptions(selectedOptions.filter(option => option !== selectedValues[0]));
 			console.log(selectedValues[0])
 		}
-			//setSelectedOptions(selectedValues);
   	}
-	//para el combobox drop down de los temperamentos
-	// const dropdownTemperaments = temperaments.map(t => {
-	// 	return {value: t.name, label: t.name}
-	// })
-
+	
     const [dog, setDog] = useState({
         name: "",
 		height: "",
@@ -83,41 +77,37 @@ const DogCreate = () => {
 
         // Validaciones
 		if (!obj.name) {
-			alert('Hey! falta el nombre.');
+			alert('The name is missing.');
 			return;
 		}
 		if (!obj.life_span) {
-			alert('Hey! aun falta la Esperansa de vida.');
+			alert('The life expectancy is missing.');
 			return;
 		}
 		if (!obj.heightMin) {
-			alert('Hey! falta la altura minima.');
+			alert('The Heigth minimun is missing.');
 			return;
 		}
         if (!obj.heightMax) {
-			alert('Hey! falta la altura maxima.');
+			alert('The Heigth maximun is missing.');
 			return;
 		}
         if (!obj.weightMin) {
-			alert('Hey! falta el peso minimo.');
+			alert('The Weigth minimun is missing.');
 			return;
 		}
         if (!obj.weightMax) {
-			alert('Hey! falta el peso maximo.');
+			alert('The Weigth maximun is missing.');
 			return;
 		}
 		if (obj.heightMin > obj.heightMax) {
-			alert('Hey! la altura minima no puese ser mayor que la altura maxima.');
+			alert('The minimum Height cannot be greater than the maximum Height..');
 			return;
 		}
         if (obj.weightMin > obj.weightMax) {
-			alert('Hey! el peso minimo no puese ser mayor que el peso maximo.');
+			alert('Hey! the minimum Weight cannot be greater than the maximum Weight.');
 			return;
 		}
-
-		// const selectedTemperaments = selectedOptions.map(t => {
-		// 	return t.value
-		// })
 
 		const newobj = {
 			name: dog.name,
@@ -130,7 +120,7 @@ const DogCreate = () => {
 
 		dispatch(createDog(newobj));
 		e.target.reset();
-		alert('Dog creado correctamente !');
+		alert('Dog created correctly !');
 
         setDog({
             name: "",
@@ -148,11 +138,11 @@ const DogCreate = () => {
     };
 
     return (
-        <div>
+        <div className="container-dog">
             <Navbar showSearch={false}/>
             <h1>Create DOG</h1>
             <h3>Complete the characteristics of your new dog:</h3>
-            <form id='survey-form'
+            <form id='principal-form'
 				className='form'
 				noValidate
 				onChange={(e) => ChangeInput(e)}
@@ -161,7 +151,7 @@ const DogCreate = () => {
 					<div>
 						<div className='divTitles'>
 							<div>
-								<label><strong>-Name: </strong></label>
+								<label><strong>Name: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -170,14 +160,14 @@ const DogCreate = () => {
 								></input>
 							</div>
                             <div>
-								<label><strong>-Height: Minima: </strong></label>
+								<label><strong>Height: Minimun: </strong></label>
 								<input
 									className='label'
 									type='text'
 									name='heightMin'
 									value={dog.heightMin}
 								></input>
-                				<label><strong> Máxima: </strong></label>
+                				<label><strong> Maximun: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -186,14 +176,14 @@ const DogCreate = () => {
 								></input>
 							</div>
                 			<div>
-								<label><strong>-Weight: Minima: </strong></label>
+								<label><strong>Weight: Minimun: </strong></label>
 								<input
 									className='label'
 									type='text'
 									name='weightMin'
 									value={dog.weightMin}
 								></input>
-                				<label><strong> Máxima: </strong></label>
+                				<label><strong> Maximum: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -202,7 +192,7 @@ const DogCreate = () => {
 								></input>
 							</div>
                				 <div>
-								<label><strong>-Life Span: </strong></label>
+								<label><strong>Life Span: </strong></label>
 								<input
 									className='label'
 									type='text'
@@ -212,7 +202,7 @@ const DogCreate = () => {
 							</div>
               			</div>
               			<div className='imagediv'>
-							<label><strong>-Image URL: </strong></label>
+							<label><strong>Image URL: </strong></label>
 							<input
 								className='imagein'
 								type='text'
@@ -223,7 +213,7 @@ const DogCreate = () => {
             		</div>
             		<div className='checkboxs'>
 						<div className='checks'>
-							<label><strong>-Temperaments: </strong></label>
+							<label><strong>Temperaments: </strong></label>
 							<div className="app">
 								<div className="dropdown-container">
 									<MultiSelect 
@@ -238,26 +228,13 @@ const DogCreate = () => {
                             	))}
                         		</select> */}
 
-								{/* <select name="lenguajes" id="lang" multiple onChange={handleSelect}>
-									<option value={dropdownTemperaments}></option>
-									
-								</select> */}
-
-									{/* <Select
-										options={dropdownTemperaments}
-										placeholder="Select temperament"
-										value={selectedOptions}
-										onChange={handleSelect}
-										isSearchable={true}
-										isMulti
-									/> */}
 								</div>
 							</div>
 						</div>
 					</div>
         		</div>
           		<button className='button' type='submit'>
-						CREAR!
+						CREATE!
 				</button>
             </form>
       </div>

@@ -2,6 +2,7 @@
     position:static;
 	bottom: 0;
 	background: gray;
+    background-image: url(../../Img/fondoDetalle2.jpg);
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -24,7 +25,7 @@
 }
 
 .pag-actual {
-    background-color: #5c5c5c;
+    background-color: rgb(44, 178, 231);;
     width: 30px;
     border-radius: 4px;
     display: flex;

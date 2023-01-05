@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color: gray;
+  background-image: url(../src/Img/fondoDetalle2.jpg);
 }
 
 .App-logo {

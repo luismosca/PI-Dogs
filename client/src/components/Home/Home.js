@@ -29,6 +29,7 @@ const Home = () => {
     let currentDogs = []
     let currentSDogs = []
     
+    //pregunto si hay algo en filterDogs para determinar si son todos los dogs o los del Search
     filteredDogs.length ? currentDogs = filteredDogs.slice(indexOfFirstDog, indexOfLastDog) :
         currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog)
     filteredDogs.length ? currentSDogs = filteredDogs.slice(indexOfFirstDog, indexOfLastDog) : 
@@ -78,7 +79,7 @@ const Home = () => {
                     return <DogsCards
                     id={dog.id}
                     name={dog.name}
-                    temperament={dog.temperament}
+                    temperament={dog.temperament.split(", ").slice(0, 5).join(", ")}
                     weight={dog.weight}
                     image={dog.image}
                     key={dog.id}
@@ -114,7 +115,7 @@ const Home = () => {
                     return <DogsCards
                     id={dog.id}
                     name={dog.name}
-                    temperament={dog.temperament}
+                    temperament={dog.temperament.split(", ").slice(0, 5).join(", ")}
                     weight={dog.weight}
                     image={dog.image}
                     key={dog.id}
@@ -134,11 +135,11 @@ const Home = () => {
         )
     } else{
         return(
-            
+            <div className="MyPage">
                 <div className="load">
                     <h3>Loading...</h3>
                 </div>
-            
+            </div>
         )
     }
 

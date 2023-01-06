@@ -21,10 +21,10 @@ const DogCreate = () => {
 		//para controlar el multiselect, seleccionar y sacar de la selleccion
 		if (!selectedOptions.includes(selectedValues[0])){
 			setSelectedOptions([...selectedOptions, ...selectedValues]);
-			console.log(selectedValues[0])
+			
 		}else{
 			setSelectedOptions(selectedOptions.filter(option => option !== selectedValues[0]));
-			console.log(selectedValues[0])
+			
 		}
   	}
 	
@@ -105,7 +105,7 @@ const DogCreate = () => {
 			return;
 		}
         if (obj.weightMin > obj.weightMax) {
-			alert('Hey! the minimum Weight cannot be greater than the maximum Weight.');
+			alert('The minimum Weight cannot be greater than the maximum Weight.');
 			return;
 		}
 
@@ -221,13 +221,6 @@ const DogCreate = () => {
 										onChange={handleSelect}
 										selectedOptions={selectedOptions}
 									/>
-								{/* <select multiple="multiple" onChange={handleSelect}>
-                            	
-                            	{temperaments.map(d => (                    
-                                <option value={selectedOptions} key={d.id}>{d.name}</option> 
-                            	))}
-                        		</select> */}
-
 								</div>
 							</div>
 						</div>

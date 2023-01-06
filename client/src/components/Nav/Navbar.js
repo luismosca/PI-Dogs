@@ -9,7 +9,7 @@ const Navbar = (props) => {
     return (
         <div>
             <div className="navbar-div">
-                {props.showSearch && <SearchBar />}
+                {props.showSearch && <SearchBar setCurrentPage={props.setCurrentPage}/>}
                 <NavLink to="/home"><button>Home</button></NavLink>
                 <NavLink to='/dogcreate'><button>Create Dog</button></NavLink>   
                 <NavLink to="/about"><button>About</button></NavLink>  

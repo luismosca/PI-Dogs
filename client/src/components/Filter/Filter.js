@@ -4,17 +4,19 @@ import { connect } from 'react-redux'
 import { getTemperaments, filterByTemperament, orderByName, clearAll } from '../../redux/actions/actions';
 import './Filter.css';
 
-function FilteredBy({temperaments}) {
+function FilteredBy({temperaments, setCurrentPage}) {
 	const dispatch = useDispatch();
 
 	const handleSelect = (e) => {
 		e.preventDefault(); 
 		dispatch(filterByTemperament(e.target.value))
+		setCurrentPage(1)
 	}
 
 	const handleSelect2 = (e) => {
 		e.preventDefault(); 
 		dispatch(orderByName(e.target.value))
+		setCurrentPage(1)
 	}
 
 	const handleButton = (e) => {

@@ -6,7 +6,7 @@ const dogcreateRouter = Router();
 // creo la ruta para el POST de un dog nuevo en tabla Dog
 dogcreateRouter.post("/", async (req, res) => {
   const { name, height, weight, life_span, image, temperaments } = req.body; 
-  
+ 
   try {
     const dogCreate = await Dog.create({
       name, height, weight, life_span, image,

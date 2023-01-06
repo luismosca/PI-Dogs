@@ -107,8 +107,6 @@ try {
           temperament: d.temperaments.map(p => p.name).join(", ")
       }
       return res.json(information)
-    // const dogInDb = await Dog.findOne({ where: { id: id }, includes: [temperaments] });
-    // res.json(dogInDb);
     
   }else {
     //bysco dog en API por ID

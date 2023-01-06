@@ -64,9 +64,13 @@ const Home = () => {
     }else if(dogSearch.length && queryParam !== "home"){
         return (
             <>
-            <Navbar showSearch={true}/>
+            <Navbar
+                setCurrentPage={setcurrentPage}
+                showSearch={true}/>
             <h3>Search - Dogs</h3>
-            <FilteredBy />
+            <FilteredBy 
+                setCurrentPage={setcurrentPage}
+            />
             <Paginado
                 dogsPerPage={dogsPerPage}
                 dogSearch={dogSearch.length}
@@ -79,7 +83,7 @@ const Home = () => {
                     return <DogsCards
                     id={dog.id}
                     name={dog.name}
-                    temperament={dog.temperament.split(", ").slice(0, 5).join(", ")}
+                    temperament={dog.temperament? dog.temperament.split(", ").slice(0, 5).join(", ") : dog.temperament}
                     weight={dog.weight}
                     image={dog.image}
                     key={dog.id}
@@ -100,9 +104,13 @@ const Home = () => {
         
         return (
             <>
-            <Navbar showSearch={true}/>
+            <Navbar
+                setCurrentPage={setcurrentPage}
+                showSearch={true}/>
             <h3>Home - Dogs</h3>
-            <FilteredBy />
+            <FilteredBy 
+                setCurrentPage={setcurrentPage}
+            />
             <Paginado
                 dogsPerPage={dogsPerPage}
                 allDogs={allDogs.length}
@@ -115,7 +123,8 @@ const Home = () => {
                     return <DogsCards
                     id={dog.id}
                     name={dog.name}
-                    temperament={dog.temperament.split(", ").slice(0, 5).join(", ")}
+                //    temperament={dog.temperament.split(", ").slice(0, 5).join(", ")}
+                    temperament={dog.temperament? dog.temperament.split(", ").slice(0, 5).join(", ") : dog.temperament}    
                     weight={dog.weight}
                     image={dog.image}
                     key={dog.id}

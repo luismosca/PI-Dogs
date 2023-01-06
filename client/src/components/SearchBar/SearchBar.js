@@ -4,7 +4,7 @@ import { getDogByName } from '../../redux/actions/actions'
 import './SearchBar.css'
 
 
-export default function SearchBar() {
+export default function SearchBar({setCurrentPage}) {
     const dispatch = useDispatch()
 
     const [name, setName] = useState("")
@@ -22,6 +22,7 @@ export default function SearchBar() {
       currentUrl.search = queryParams.toString();
       window.history.pushState({}, '', currentUrl.toString());
       dispatch(getDogByName(name));
+      setCurrentPage(1)
     }
  
     return (
